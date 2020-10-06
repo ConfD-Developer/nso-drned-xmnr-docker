@@ -45,14 +45,21 @@ Manually building Docker images on your local machine
 1. Clone this repository to your local machine
 	git clone https://gitlab.com/nso-developer/nso-drned-xmnr-docker.git
 2. Download Cisco NSO
-	go to https://developer.cisco.com/docs/nso/#!getting-nso/getting-nso and click the “NSO 5.x Linux” link to download NSO
+	go to https://developer.cisco.com/docs/nso/#!getting-nso/getting-nso 
+	and click the “NSO 5.x Linux” link to download NSO
 
-	If the file ends with .signed.bin, it is a self-extracting archive that verifies a signature, execute it to produce the installer
-	for example running bash nso-5.4.linux.x86_64.signed.bin will produce a number of files, among them the install nso-5.4.linux.x86_64.installer.bin
-3. Place the nso-5.x.linux.x86_64.installer.bin file in the top-level folder of this repository
-4. run ./setup.sh in the root directory of the repository, which will build a Docker image out of all the NSO install files found
-	NOTE: running docker commands, which are invoked by the setup script, typically require root privileges or membership in the docker group.
-	Update NSO_VERSION to match the version of NSO you have downloaded.  The default is 5.4.0.2.
+	If the file ends with .signed.bin, it is a self-extracting archive
+	that verifies a signature, execute it to produce the installer
+	for example running bash nso-5.4.linux.x86_64.signed.bin will produce
+	a number of files, among them the install nso-5.4.linux.x86_64.installer.bin
+3. Place the nso-5.x.linux.x86_64.installer.bin file in the top-level folder of 
+   this repository
+4. run ./setup.sh in the root directory of the repository, which will build a
+   Docker image out of all the NSO install files found
+	NOTE: running docker commands, which are invoked by the setup script,
+	typically require root privileges or membership in the docker group.
+	Update NSO_VERSION to match the version of NSO you have downloaded.
+	The default is 5.4.0.2.
 
 	The completion of the docker build should look like as follows:
 
@@ -81,7 +88,8 @@ Manually building Docker images on your local machine
 	Successfully built c873c3adb1c6
 	Successfully tagged nso-drned-xmnr:latest
 
-5. You can also optionally verify that docker image has been built with the following command:
+5. You can also optionally verify that docker image has been built with the
+   following command:
 	$ docker images -a | grep nso-drned-xmnr
 	nso-drned-xmnr                                           latest              b15e3f7a9aba        28 minutes ago      1.82GB
 
@@ -107,9 +115,11 @@ You should first source /nso/ncsrc before running any other NSO tools.
 
 NETCONF and YANG Automation Testing
 -----------------------------------
-NETCONF and YANG Automation Testing User Guide v3 can be found at: https://info.tail-f.com/netconf_yang_automation_testing
+NETCONF and YANG Automation Testing User Guide v3 can be found at: 
+https://info.tail-f.com/netconf_yang_automation_testing
 
-Jump to Section 4 of NYAT User Guide and perform the following steps before continuing with your NYAT journey.
+Jump to Section 4 of NYAT User Guide and perform the following steps
+before continuing with your NYAT journey:
 	$ source /nso/ncsrc
 	$ cd /ncs-run
 	$ ncs_cli -Cu admin
