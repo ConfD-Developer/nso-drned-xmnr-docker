@@ -1,0 +1,123 @@
+NETCONF and YANG Automation (NYAT) setup
+=========================================
+
+Build a docker image with NSO and DrNED Examiner installed for performing
+NETCONF and YANG Automation testing of your devices.
+
+NSO eval:
+https://developer.cisco.com/docs/nso/#!getting-nso/downloads
+
+DrNED Examiner (downloaded by the Dockerfile):
+https://github.com/NSO-developer/drned-xmnr
+
+The NETCONF and YANG Automation Testing Guide:
+https://info.tail-f.com/netconf_yang_automation_testing
+
+Prerequisites
+-------------
+NSO and DrNED Examiner in Docker runs on:
+
+- Linux
+- Mac OS X
+
+To build these images, you need:
+
+- Docker
+- Make
+
+Install with:
+
+Debian: apt install coreutils make
+Mac OS X: brew install coreutils
+see https://docs.docker.com/get-docker/ for installation instructions for Docker
+
+Usage
+-----
+The ideal scenario would be to deliver prebuilt Docker images containing NSO
+but as legal requirements prevent that, this is the second best option. This
+repository contains recipes that you can use to produce Docker images yourself.
+Just add Cisco NSO.
+
+Building
+--------
+Manually building Docker images on your local machine
+
+1. Clone this repository to your local machine
+	git clone https://gitlab.com/nso-developer/nso-drned-xmnr-docker.git
+2. Download Cisco NSO
+	go to https://developer.cisco.com/docs/nso/#!getting-nso/getting-nso and click the “NSO 5.x Linux” link to download NSO
+
+	If the file ends with .signed.bin, it is a self-extracting archive that verifies a signature, execute it to produce the installer
+	for example running bash nso-5.4.linux.x86_64.signed.bin will produce a number of files, among them the install nso-5.4.linux.x86_64.installer.bin
+3. Place the nso-5.x.linux.x86_64.installer.bin file in the top-level folder of this repository
+4. run ./setup.sh in the root directory of the repository, which will build a Docker image out of all the NSO install files found
+	NOTE: running docker commands, which are invoked by the setup script, typically require root privileges or membership in the docker group.
+	Update NSO_VERSION to match the version of NSO you have downloaded.  The default is 5.4.0.2.
+
+	The completion of the docker build should look like as follows:
+
+	Step 12/18 : WORKDIR /ncs-run
+	 ---> Running in cc3bb7aa1e48
+	Removing intermediate container cc3bb7aa1e48
+	 ---> 66f6dea51b72
+	Step 13/18 : ADD Makefile /ncs-run
+	 ---> 9d4afcaef0b5
+	Step 14/18 : ADD add_device.py /ncs-run
+	 ---> 9dd51f4c1a05
+	Step 15/18 : WORKDIR /nso
+	 ---> Running in dafc0856058b
+	Removing intermediate container dafc0856058b
+	 ---> 02c57d8f096f
+	Step 16/18 : ADD run.sh /nso
+	 ---> d87dbad0217a
+	Step 17/18 : EXPOSE 22 2022 2024 8080 8888
+	 ---> Running in 56a8b1962891
+	Removing intermediate container 56a8b1962891
+	 ---> c28bfc6644ae
+	Step 18/18 : CMD [ "./run.sh" ]
+	 ---> Running in e688f3c32eac
+	Removing intermediate container e688f3c32eac
+	 ---> c873c3adb1c6
+	Successfully built c873c3adb1c6
+	Successfully tagged nso-drned-xmnr:latest
+
+5. You can also optionally verify that docker image has been built with the following command:
+	$ docker images -a | grep nso-drned-xmnr
+	nso-drned-xmnr                                           latest              b15e3f7a9aba        28 minutes ago      1.82GB
+
+
+Running
+-------
+An example docker run command:
+
+docker run -it -p 2222:22 -e DOCKPWD=root-password nso-drned-xmnr:latest
+
+Exposed ports
+Protocol	Port	Use
+TCP	22	SSH
+TCP	8080	HTTP	
+TCP	8888	HTTPS	
+TCP	2022	NSO NETCONF Northbound	
+TCP	2024	ncs_cli	
+
+NSO is installed at /nso
+NSO project has been set up at /ncs-run
+You should first source /nso/ncsrc before running any other NSO tools.
+
+
+NETCONF and YANG Automation Testing
+-----------------------------------
+NETCONF and YANG Automation Testing User Guide v3 can be found at: https://info.tail-f.com/netconf_yang_automation_testing
+
+Jump to Section 4 of NYAT User Guide and perform the following steps before continuing with your NYAT journey.
+	$ source /nso/ncsrc
+	$ cd /ncs-run
+	$ ncs_cli -Cu admin
+	admin@ncs# 
+
+
+
+
+
+
+
