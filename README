@@ -112,6 +112,12 @@ NSO is installed at /nso
 NSO project has been set up at /ncs-run
 You should first source /nso/ncsrc before running any other NSO tools.
 
+In addition to the console shell, you can login to the container (with root-password) by:
+   ssh -p 2222 root@localhost
+   
+To copy log files to your local host (command to be issued on your localhost):
+   scp -P 2222 root@localhost:/ncs-run/logs/ncs-python-vm-drned-xmnr.log .
+   
 
 NETCONF and YANG Automation Testing
 -----------------------------------
