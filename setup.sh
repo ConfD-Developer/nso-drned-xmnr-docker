@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NSO_VERSION="5.4.0.2"
+NSO_VERSION="5.5"
 
 if [ -f nso-$NSO_VERSION.linux.x86_64.installer.bin ]
 then

@@ -16,7 +16,10 @@ service ssh status
 
 cd /ncs-run
 make ncs
+sed -i '/<syslog>/{n;s/<enabled>true<\/enabled>/<enabled>false<\/enabled>/}' ncs.conf
 ls
+wget https://raw.githubusercontent.com/ConfD-Developer/ConfD-Demos/master/ned-test/ned-test.py
+chmod a+x ned-test.py
 cd packages
 git clone https://github.com/NSO-developer/drned-xmnr
 ls

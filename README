@@ -43,7 +43,7 @@ Building
 Manually building Docker images on your local machine
 
 1. Clone this repository to your local machine
-	git clone https://gitlab.com/nso-developer/nso-drned-xmnr-docker.git
+	git clone https://github.com/ConfD-Developer/nso-drned-xmnr-docker.git
 2. Download Cisco NSO
 	go to https://developer.cisco.com/docs/nso/#!getting-nso/getting-nso 
 	and click the “NSO 5.x Linux” link to download NSO
@@ -59,7 +59,7 @@ Manually building Docker images on your local machine
 	NOTE: running docker commands, which are invoked by the setup script,
 	typically require root privileges or membership in the docker group.
 	Update NSO_VERSION to match the version of NSO you have downloaded.
-	The default is 5.4.0.2.
+	The default is 5.5.
 
 	The completion of the docker build should look like as follows:
 
@@ -130,6 +130,9 @@ before continuing with your NYAT journey:
 	$ cd /ncs-run
 	$ ncs_cli -Cu admin
 	admin@ncs# 
+
+You can also use the automation scripts to reduce some typing for you
+as described in Section 7 of the NYAT User Guide v4.
 
 
 
