@@ -5,7 +5,7 @@ Build a docker image with NSO and DrNED Examiner installed for performing
 NETCONF and YANG Automation testing of your devices.
 
 NSO eval:
-https://developer.cisco.com/docs/nso/#!getting-nso/downloads
+https://developer.cisco.com/docs/nso/getting-and-installing-nso/#getting-nso
 
 DrNED Examiner (downloaded by the Dockerfile):
 https://github.com/NSO-developer/drned-xmnr
